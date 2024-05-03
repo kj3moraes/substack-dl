@@ -1,4 +1,4 @@
-// Call substack-dl to download all posts from a substack newsletter. For the 
+// Call substack-dl to download all posts from a substack newsletter. For the
 // full readme, go to: https://github.com/nosajio/substack-dl
 
 mod parser;
@@ -15,25 +15,25 @@ async fn main() -> Result<(), String> {
         .await
         .expect("Could not fetch & parse posts");
 
-    let save_op = match op.save_dir_exists() {
-        true => {
-            let overwrite = prompt_default(
-                format!(
-                    "directory {} exists. Do you want to overwrite it?",
-                    &op.output_dir
-                ),
-                false,
-            )
-            .unwrap();
-            op.save_files(overwrite)
-        }
-        false => op.save_files(false),
-    };
+    // let save_op = match op.save_dir_exists() {
+    //     true => {
+    //         let overwrite = prompt_default(
+    //             format!(
+    //                 "directory {} exists. Do you want to overwrite it?",
+    //                 &op.output_dir
+    //             ),
+    //             false,
+    //         )
+    //         .unwrap();
+    //         op.save_files(overwrite)
+    //     }
+    //     false => op.save_files(false),
+    // };
 
-    match save_op {
-        Ok(status) => println!("Completed: {}", status),
-        Err(e) => return Err(format!("{}", e)),
-    }
+    // match save_op {
+    //     Ok(status) => println!("Completed: {}", status),
+    //     Err(e) => return Err(format!("{}", e)),
+    // }
 
     Ok(())
 }
